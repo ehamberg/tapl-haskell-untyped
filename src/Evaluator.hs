@@ -31,8 +31,8 @@ helper term varHandler = walk 0 term
 eval1 :: Term -> ThrowsError (Maybe Term)
 eval1 (TmApp (TmAbs _ t12) t2) | isval t2 = return $ Just $ shift (-1) (sub 0 (shift 1 t2) t12)
 eval1 (TmApp t1 t2) | isval t1  = liftM (liftM        (TmApp t1)) (eval1 t2)
-                    | otherwise = liftM (liftM ((flip TmApp) t2)) (eval1 t1)
-eval1 _ = return $ Nothing
+                    | otherwise = liftM (liftM (flip TmApp t2)) (eval1 t1)
+eval1 _ = return Nothing
 
 -- Small-step evaluation of a term
 eval :: Term -> ThrowsError Term

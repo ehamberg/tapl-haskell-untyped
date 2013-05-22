@@ -31,7 +31,7 @@ showTerms [] _ = ""
 -- handle TmBind here, because it is the only that affects
 -- terms later in the sequence (as opposed to an abstraction,
 -- which affect terms within its subtree)
-showTerms ((TmBind str):ts) ctx = str ++ " \n" ++
+showTerms (TmBind str:ts) ctx = str ++ " \n" ++
                                   showTerms ts (appendBinding ctx str)
 showTerms (t:ts) ctx = showInCtx t ctx ++ "\n" ++ showTerms ts ctx
 

@@ -46,7 +46,5 @@ getTestDotFTestWithPath parseAndEval path
 -- if there are any failures or errors
 runTests :: Test -> IO ()
 runTests allTests = do counts <- runTestTT allTests
-                       putStrLn $ show counts
-                       if ((errors counts) + (failures counts)) > 0
-                         then exitFailure
-                         else return ()
+                       print counts
+                       when (errors counts + failures counts > 0) exitFailure

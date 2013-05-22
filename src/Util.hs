@@ -31,7 +31,7 @@ findFile filename (path:searchpath) =
 -- will be added to the searchpath
 getContentsFromCmdLine :: IO String
 getContentsFromCmdLine = do args <- getArgs
-                            file <- (uncurry findFile) $ parseArgs args
+                            file <- uncurry findFile $ parseArgs args
                             readFile file
 
 getFileContents :: String -> IO String

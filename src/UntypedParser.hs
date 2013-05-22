@@ -60,7 +60,7 @@ getIndex (Context boundNames) name = iter 0 (reverse boundNames)
 untypedVar = do var <- identifier
                 ctx <- getState
                 idx <- getIndex ctx var
-                return $ TmVar { index = idx, contextLength = ctxLength ctx }
+                return TmVar { index = idx, contextLength = ctxLength ctx }
 
 -- parses, e.g., "lambda x. x x"
 untypedAbs = do reserved "lambda"
@@ -94,8 +94,7 @@ parseStmt = do t <- parseTerm
 
 untypedParser = do setState newContext
                    whiteSpace
-                   terms <- many1 parseStmt
-                   return terms
+                   many1 parseStmt
 
 parseUntyped :: String -> ThrowsError [Term]
 parseUntyped str = case runParser untypedParser newContext "Untyped Parser" str of

@@ -25,7 +25,7 @@ instance Error TaplError where
 
 type ThrowsError = Either TaplError
 
-trapError = (flip catchError) (return . show)
+trapError = flip catchError (return . show)
 
 extractValue :: ThrowsError a -> a
 extractValue (Right val) = val

@@ -30,7 +30,7 @@ pickFreshName ctx@(Context bindings) name =
 getNameByIndex :: Context -> Int -> String
 getNameByIndex (Context ns) index =
     if length ns > index
-    then (reverse ns) !! index
+    then reverse ns !! index
     else error $ "Requested index " ++ show index ++
              " of Context of length " ++ show (length ns)
 
