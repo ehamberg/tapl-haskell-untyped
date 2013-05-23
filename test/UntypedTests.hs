@@ -11,16 +11,16 @@ untypedEvalTests
        ("binder + usage", "x \nx", "x/;x;"),
        ("multi-binder", "x \nx\ny \ny\nx", "x/;x;y/;y;x;"),
        ("app", "x \nx x", "x/;x x;"),
-       ("lambda", "(lambda x. x)", "lambda x. x;"),
-       ("lambda + app", "(lambda x. x x)", "lambda x. x x;"),
-       ("binder + lambda", "x \n(lambda x'. x')", "x/; lambda x. x;"),
-       ("apply lambda", "(lambda y. y)", "(lambda x. x) (lambda y. y);"),
-       ("binder + apply lambda", "z \n(lambda y. y)", "z/;(lambda x. x) (lambda y. y);"),
-       ("abs + app", "(lambda x. x x)", "(lambda x. x) (lambda x. x x);"),
+       ("λ", "(λ x. x)", "λ x. x;"),
+       ("λ + app", "(λ x. x x)", "λ x. x x;"),
+       ("binder + λ", "x \n(λ x'. x')", "x/; λ x. x;"),
+       ("apply λ", "(λ y. y)", "(λ x. x) (λ y. y);"),
+       ("binder + apply λ", "z \n(λ y. y)", "z/;(λ x. x) (λ y. y);"),
+       ("abs + app", "(λ x. x x)", "(λ x. x) (λ x. x x);"),
                                                                              -- test the full sample file from the original untyped impl
-       ("full test.f", "x \nx\n(lambda x'. x')\n(lambda x'. x' x')",
-        "/* Examples for testing */\n\nx/;\nx;\n\nlambda x. x;\n(lambda x. x) (lambda x. x x);\n"),
-       ("nested lambdas", "(lambda b. b)", "(lambda x. (lambda y. x y x)) (lambda z. (lambda a. z)) (lambda b. b);")
+       ("full test.f", "x \nx\n(λ x'. x')\n(λ x'. x' x')",
+        "/* Examples for testing */\n\nx/;\nx;\n\nλ x. x;\n(λ x. x) (λ x. x x);\n"),
+       ("nested lambdas", "(λ b. b)", "(λ x. (λ y. x y x)) (λ z. (λ a. z)) (λ b. b);")
       ]
 
 

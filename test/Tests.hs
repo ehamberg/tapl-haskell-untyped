@@ -62,11 +62,11 @@ untypedParseTests = [("whitespace1", TmBind "x", "  \tx/;"),
               ("comments3", TmBind "x", "/* comment ******/x/;"),
               ("bind", TmBind "x", "x/;"),
               ("abs + app", TmAbs "x" (TmApp (TmVar 0 1) (TmVar 0 1)),
-                              "lambda x. x x;"),
+                              "λ x. x x;"),
               ("app associativity",
                TmAbs "x" (TmApp (TmApp (TmVar 0 1) (TmVar 0 1))
                                 (TmVar 0 1)),
-               "lambda x. x x x;")
+               "λ x. x x x;")
              ]
 
 getAllTests = do testDotFTest <- getTestDotFTest parseAndEval
