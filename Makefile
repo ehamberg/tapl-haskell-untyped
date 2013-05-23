@@ -9,14 +9,17 @@ TESTFILES := $(wildcard test/*.hs)
 $(UNTYPED): $(SRCFILES)
 	cabal-dev -j4 install
 
-run: test.λ
+$(UNTYPEDTEST): $(TESTFILES)
+	cabal-dev -j4 install
+
+run: $(UNTYPED) test.λ
 	$(UNTYPED) test.λ
 
-run-tests: $(UNTYPED) $(TESTFILES) test.out test.λ
-	$(UNTYPED)-test
+run-tests: $(UNTYPED) $(UNTYPEDTEST)
+	$(UNTYPEDTEST)
 
 clean:
-	rm -f $(UNTYPED) $(UNTYPED)-test
+	rm -f $(UNTYPED) $(UNTYPEDTEST)
 
 veryclean:
 	rm -rf cabal-dev
