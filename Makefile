@@ -1,4 +1,4 @@
-.PHONY: test run
+.PHONY: test run clean veryclean
 
 UNTYPED=cabal-dev/bin/untyped
 
@@ -13,3 +13,9 @@ run: test.f
 
 run-tests: $(UNTYPED) $(TESTFILES) test.out test.f
 	$(UNTYPED)-test
+
+clean:
+	rm -f $(UNTYPED) $(UNTYPED)-test
+
+veryclean:
+	rm -rf cabal-dev
