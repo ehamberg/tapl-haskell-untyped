@@ -28,17 +28,17 @@ dropTrailingNewlines str | str == "" = ""
                              = dropTrailingNewlines $ take (length str - 1) str
                          | otherwise = str
 
--- Each OCaml implementation has a test.f that we copy over into our
+-- Each OCaml implementation has a test.λ that we copy over into our
 -- implementation, along with a test.out file that contains the output
 -- from running it on the OCaml impl
 getTestDotFTest parseAndEval =
     getTestDotFTestWithPath parseAndEval "."
 
 getTestDotFTestWithPath parseAndEval path
-    = do input <- getFileContents (path </> "test.f")
+    = do input <- getFileContents (path </> "test.λ")
          output <- getFileContents (path </> "test.out")
          return $ makeEvalTest parseAndEval
-                    ("test.f",
+                    ("test.λ",
                      output,
                      input)
 
