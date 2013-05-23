@@ -23,11 +23,11 @@ untypedDef = LanguageDef
              , commentEnd = "*/"
              , commentLine = ""
              , nestedComments = False
-             , identStart = letter
+             , identStart = oneOf ['a'..'z']
              , identLetter = nonleadingLetters
-             , opStart = letter
-             , opLetter = nonleadingLetters
-             , reservedNames = ["λ", "/"]
+             , opStart = oneOf "λ/"
+             , opLetter = pzero
+             , reservedNames = []
              , reservedOpNames = []
              , caseSensitive = True
              }
@@ -44,7 +44,7 @@ reserved = P.reserved lexer
 
 -- binds this variable into the context
 binder = do var <- identifier
-            reserved "/"
+            symbol "/"
             updateState (\c -> appendBinding c var)
             return $ TmBind var
 
@@ -63,7 +63,7 @@ untypedVar = do var <- identifier
                 return TmVar { index = idx, contextLength = ctxLength ctx }
 
 -- parses, e.g., "λ x. x x"
-untypedAbs = do reserved "λ"
+untypedAbs = do symbol "λ"
                 var <- identifier
                 dot
                 -- bind the variable before parsing the body of the
