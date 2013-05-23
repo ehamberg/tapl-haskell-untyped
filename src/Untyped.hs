@@ -19,8 +19,8 @@ data Term = TmVar { index :: Int, contextLength :: Int }
             deriving (Show, Eq)
 
 showInCtx t@(TmVar _ _) ctx = if contextLength t == ctxLength ctx
-                              then getNameByIndex ctx (index t)
-                              else error "Context length does match"
+                                 then getNameByIndex ctx (index t)
+                                 else error "Context length does match"
 showInCtx (TmAbs str t) ctx = let (ctx', name) = pickFreshName ctx str
                                in "(λ " ++ name ++ ". " ++
                                   showInCtx t ctx' ++ ")"
