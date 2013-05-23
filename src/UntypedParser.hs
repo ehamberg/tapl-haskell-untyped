@@ -27,7 +27,7 @@ untypedDef = LanguageDef
              , identLetter = nonleadingLetters
              , opStart = letter
              , opLetter = nonleadingLetters
-             , reservedNames = ["lambda", "/"]
+             , reservedNames = ["λ", "/"]
              , reservedOpNames = []
              , caseSensitive = True
              }
@@ -62,8 +62,8 @@ untypedVar = do var <- identifier
                 idx <- getIndex ctx var
                 return TmVar { index = idx, contextLength = ctxLength ctx }
 
--- parses, e.g., "lambda x. x x"
-untypedAbs = do reserved "lambda"
+-- parses, e.g., "λ x. x x"
+untypedAbs = do reserved "λ"
                 var <- identifier
                 dot
                 -- bind the variable before parsing the body of the

@@ -9,7 +9,7 @@ import Context
 -- it was defined in (as described in Chapter 7, this helps expose
 -- implementation errors).
 --
--- TmAbs stores the variable name (e.g., "x" in "lambda x. ...")
+-- TmAbs stores the variable name (e.g., "x" in "λ x. ...")
 -- only so that we can try to use that name when printing the
 -- function (it does not affect how the abstraction is evaluated)
 data Term = TmVar { index :: Int, contextLength :: Int }
@@ -22,8 +22,8 @@ showInCtx t@(TmVar _ _) ctx = if contextLength t == ctxLength ctx
                               then getNameByIndex ctx (index t)
                               else error "Context length does match"
 showInCtx (TmAbs str t) ctx = let (ctx', name) = pickFreshName ctx str
-                              in "(lambda " ++ name ++ ". " ++
-                                 showInCtx t ctx' ++ ")"
+                               in "(λ " ++ name ++ ". " ++
+                                  showInCtx t ctx' ++ ")"
 showInCtx (TmApp t1 t2) ctx = showInCtx t1 ctx ++ " " ++ showInCtx t2 ctx
 
 showTerms :: [Term] -> Context -> String
